@@ -10,3 +10,5 @@ Website with top 15 trending posts from various social media platform
 - connect to server
 - at the server, data will be refreshed every 3 minutes
 
+# Problems to solve:
+- twitter's trending hashtags disappear after some time
