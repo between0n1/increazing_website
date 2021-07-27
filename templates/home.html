@@ -2,20 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Increaz</title>
+    <title>increaZing</title>
     <link rel="stylesheet" href=  "{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 <div class = "hero">
+    <div class = "TopBar">
+        
+    </div>
     <div class = "Twitter">
-        <img class = "Logo" alt = "Twitter logo" src="../static/images/twitter.svg" >
-        <a>Trending</a>
-        <vo>Volume</vo><br>
-        {% for post in data.get("Twitter").posts %}
-        <a href = {{post.link}}>{{post.title}}</a>
-        <vo> {{post.volume}}</vo><br>
+        <img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg">
+        {% for post in (data.get("Twitter").posts) %}
+            <div class = "Twit" onclick="location.href='{{post.link}}';">
+                {% if post.title[0] != '#' %}
+                    <a>#{{post.title}}</a>
+                {% else %}
+                    <a> {{post.title}}</a>
+                {% endif %}
+                <b>{{post.volume // 1000}}K+ twits</b><br>
+            </div>
         {% endfor %}
     </div>
+
+    <div class="Google">
+    <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+    </div>
 </div>
+
 </body>
 </html>

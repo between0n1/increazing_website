@@ -5,7 +5,6 @@ from classes import *
 import APIkeys
 
 #Twitter
-
 #API Keys
 consumer_key = APIkeys.APIKEY
 consumer_secret = APIkeys.APISecretKey
@@ -18,7 +17,7 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 #get trending twits
-t = api.trends_place(1)[0]['trends']
+t = api.trends_place(2352824)[0]['trends']
 twt_trends = []
 for i in t:
     name = i['name']
@@ -29,6 +28,8 @@ for i in t:
         twt_trends.append(twt)
 twt_trends.sort(reverse=True)
 twt_trends = twt_trends[:15]
+#end of Twitter
+
 #Entire database
 SocialMedias = Platforms()
 Twitter = Source(name="Twitter", posts = twt_trends)
@@ -43,4 +44,4 @@ def home():
     return render_template("home.html", data = data)
 if __name__ == '__main__':
     # sort by tweet_volume
-    app.run()
+    app.run(debug=True)
