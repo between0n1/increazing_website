@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Increaz</title>
+    <link rel="stylesheet" href=  "{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<div class = "hero">
+    <div class = "Twitter">
+        <img class = "Logo" alt = "Twitter logo" src="../static/images/twitter.svg" >
+        <a>Trending</a>
+        <vo>Volume</vo><br>
+        {% for post in data.get("Twitter").posts %}
+        <a href = {{post.link}}>{{post.title}}</a>
+        <vo> {{post.volume}}</vo><br>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

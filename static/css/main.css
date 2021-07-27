@@ -1,0 +1,62 @@
+@font-face {
+    font-family: twitter;
+    src: url(../fonts/twitter.otf) format("opentype");
+}
+
+@font-face {
+    font-family: twitter;
+    src: url(../fonts/twitterBold.otf) format("opentype");
+    font-weight: bold;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+.Twitter{
+    position: absolute;
+    top: 30%;
+    border: 3px solid RGB(29,161,242);
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+    background-color: white;
+}
+
+.Twitter a{
+    font-family: twitter;
+    position: absolute;
+    left: 5%;
+    margin-bottom: 100%;
+}
+
+.Twitter vo{
+    font-family: twitter;
+    position: absolute;
+    right: 5%;
+}
+.Logo{
+    position:absolute;
+    left:-8%;
+    top:-10%;
+    width: 20%;
+}
+a{
+    font-family: twitter;
+    font-size: 17px;
+}
+vo{
+    font-family: twitter;
+    font-size: 15px;
+}
+
+.hero{
+    height : 200vh;
+    width: 100%;
+    /* background-image: url("../images/cool-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+    background-color: whitesmoke;
+    display : flex;
+    justify-content: center;;
+}
