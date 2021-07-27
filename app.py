@@ -4,6 +4,8 @@ from flask import Flask, render_template
 from classes import *
 import APIkeys
 
+# domain = increazing.com by namecheap
+
 #Twitter
 #API Keys
 consumer_key = APIkeys.APIKEY
@@ -44,4 +46,4 @@ def home():
     return render_template("home.html", data = data)
 if __name__ == '__main__':
     # sort by tweet_volume
-    app.run(host = '0.0.0.0')
+    app.run(host = '0.0.0.0', port = 5000)
