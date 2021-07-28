@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template
 from classes import *
 from flask_apscheduler import APScheduler
+from waitress import serve
 import APIkeys
 import requests
 import json
@@ -38,4 +39,6 @@ if __name__ == '__main__':
     scheduler = APScheduler()
     scheduler.add_job(id="Scheduled task", func=scheduleTask, trigger= "interval", seconds= 600)
     scheduler.start()
-    app.run(host = '0.0.0.0', port = 5000)
+    print("running")
+    serve(app, host = '0.0.0.0', port = 5000)
+    # app.run( host='0.0.0.0', port=5000) # for test
