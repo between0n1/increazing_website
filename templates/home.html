@@ -27,6 +27,21 @@
     <div class="Google">
     <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
     </div>
+
+    <div class="Reddit">
+        <!-- <a href = "https://www.reddit.com" target="_blank"><img class = "Logo" alt = "Reddit Logo" src="../static/images/reddit.svg" ></a> -->
+        {% for post in (data.get("Reddit").posts) %}
+<!--            <div class = "reddit_post" onclick="window.open('{{post.link}}');">-->
+            <div class = "reddit_post">
+                <a> {{post.title}}</a> <b>{{post.volume//1000}}K+ likes</b> <br>
+                {% if post.video != None %}
+                    <video src="{{post.video}}" controls></video>
+                {% else %}
+                    <img src = {{post.img}} height="200" width="320">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 </body>

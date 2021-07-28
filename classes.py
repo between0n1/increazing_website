@@ -47,3 +47,18 @@ class Twt(Post):
     def __eq__(self, other):
         return self.volume == other.volume
 
+class Reddit(Post):
+    def __init__(self, title = "", text= "", link = None, volume = None, img = None, author = None, video = None):
+        super().__init__(title= title, text= text, link= link)
+        self.volume = volume
+        self.img = img
+        self.author = author
+        self.video = video
+    def __repr__(self):
+        return f"title: {self.title} volume: {str(self.volume)} link: {self.link}"
+    def __lt__(self, other):
+        return self.volume < other.volume
+    def __eq__(self, other):
+        return self.volume == other.volume
+
+
