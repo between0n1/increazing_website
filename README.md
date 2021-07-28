@@ -1,4 +1,5 @@
-# increaZ
+# increaZing
+http://www.increazing.com
 Website with top 15 trending posts from various social media platform
 <img width="1432" alt="image" src="https://user-images.githubusercontent.com/67476090/127243550-55754d92-5aa4-4ead-a39e-0c0e70328c33.png">
 
@@ -16,7 +17,7 @@ Website with top 15 trending posts from various social media platform
 # Done:
 - connected to AWS ec2 (Jul 27 2021)
 - website automatically fetch data from social media platforms in the AWS ec2 virtual server (Jul 27 2021)
-- domain linked to https://www.increazing.com (Jul 27 2021)
+- domain linked to http://www.increazing.com (Jul 27 2021)
 
 # Used:
 - python, html, css
