@@ -6,7 +6,7 @@ Website with top 15 trending posts from various social media platform
 # Now available with:
 - top 15 trending hashtags from Twitter (using API)
 - top 10 trending searches from Google
-
+- top 15 trending post from reddit (including image or video)
 # To-do:
 - website design
 - now the project is using flask development server, but I have to use a server for production deployment
