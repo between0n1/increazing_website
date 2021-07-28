@@ -11,6 +11,8 @@ class Platforms:
     def get(self, sourceName):
         if self.sources.get(sourceName) != None:
             return self.sources.get(sourceName)
+    def clear(self):
+        self.sources = {}
 
 
 

@@ -11,15 +11,15 @@
         
     </div>
     <div class = "Twitter">
-        <img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg">
+        <a href = "https://www.twitter.com" target="_blank"><img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg" ></a>
         {% for post in (data.get("Twitter").posts) %}
-            <div class = "Twit" onclick="location.href='{{post.link}}';">
+            <div class = "Twit" onclick="window.open('{{post.link}}');">
                 {% if post.title[0] != '#' %}
                     <a>#{{post.title}}</a>
                 {% else %}
                     <a> {{post.title}}</a>
                 {% endif %}
-                <b>{{post.volume // 1000}}K+ twits</b><br>
+                <b>{{post.volume//1000}}K+ tweets</b><br>
             </div>
         {% endfor %}
     </div>
