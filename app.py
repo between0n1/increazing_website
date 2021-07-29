@@ -40,5 +40,8 @@ if __name__ == '__main__':
     scheduler.add_job(id="Scheduled task", func=scheduleTask, trigger= "interval", seconds= 600)
     scheduler.start()
     print("running")
-    serve(app, host = '0.0.0.0', port = 5000)
-    # app.run( host='0.0.0.0', port=5000) # for test
+    if os.environ.get('FLASK_ENV') == "development":
+        app.run(host='0.0.0.0', port=5000)  # for test
+    else:
+        serve(app, host = '0.0.0.0', port = 5000)
+
