@@ -36,7 +36,7 @@ class Post: # a post from sources
     def __repr__(self):
         return self.title + ", " + self.text
 
-class Twt(Post):
+class Twitter(Post):
     def __init__(self, title = "", text= "", link = None, volume = None):
         super().__init__(title= title, text= text, link= link)
         self.volume = volume

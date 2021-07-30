@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>increaZing</title>
     <link rel="stylesheet" href=  "{{ url_for('static', filename='css/main.css') }}">
 </head>
@@ -10,39 +11,90 @@
     <div class = "TopBar">
         
     </div>
-    <div class = "Twitter">
-        <a href = "https://www.twitter.com" target="_blank"><img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg" ></a>
-        {% for post in (data.get("Twitter").posts) %}
-            <div class = "Twit" onclick="window.open('{{post.link}}');">
-                {% if post.title[0] != '#' %}
-                    <a>#{{post.title}}</a>
-                {% else %}
-                    <a> {{post.title}}</a>
-                {% endif %}
-                <b>{{post.volume//1000}}K+ tweets</b><br>
+    <div class="mainslider">
+        <div class="mainslides">
+            <div class = "Twitter" id ="mainslide-1">
+                <a href = "https://www.twitter.com" target="_blank"><img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg" ></a>
+                {% for post in (data.get("Twitter").posts) %}
+                    <div class = "Twit" onclick="window.open('{{post.link}}');">
+                        {% if post.title[0] != '#' %}
+                            <a>#{{post.title}}</a>
+                        {% else %}
+                            <a> {{post.title}}</a>
+                        {% endif %}
+                        <b>{{post.volume//1000}}K+ tweets</b><br>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-
-    <div class="Google">
-    <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
-    </div>
-
-    <div class="Reddit">
-        <!-- <a href = "https://www.reddit.com" target="_blank"><img class = "Logo" alt = "Reddit Logo" src="../static/images/reddit.svg" ></a> -->
-        {% for post in (data.get("Reddit").posts) %}
-<!--            <div class = "reddit_post" onclick="window.open('{{post.link}}');">-->
-            <div class = "reddit_post">
-                <a> {{post.title}}</a> <b>{{post.volume//1000}}K+ likes</b> <br>
-                {% if post.video != None %}
-                    <video src="{{post.video}}" controls></video>
-                {% else %}
-                    <img src = {{post.img}} height="200" width="320">
-                {% endif %}
+        
+            <div class="Google" id ="mainslide-2">
+            <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
             </div>
-        {% endfor %}
+        
+            <div class="Reddit" id ="mainslide-3">
+                <div class="slider">
+                    <div class="slides">
+                        {% for index in range(5) %}
+                            {% with post = data.get("Reddit").posts[index] %}
+                        <div id="slide-{{index+1}}" >
+                            <div type="button"class="collapsible"><a style="font-size: 12px; margin-bottom: 10px;" >Top {{index+1}} with {{post.volume//1000}}K+ likes </a><br> <a>{{post.title}}</a></button></div>
+                            <div class="container">
+                                {% if post.video != None %}
+                                <video src="{{post.video}}" controls></video>
+                                {% else %}
+                                <img src = "{{post.img}}">
+                                {% endif %}
+                                
+                            </div>
+                            
+                        </div>
+                            {% endwith %}
+                        {% endfor %}                      
+                    </div>
+                    <a href="#slide-1">1</a>
+                    <a href="#slide-2">2</a>
+                    <a href="#slide-3">3</a>
+                    <a href="#slide-4">4</a>
+                    <a href="#slide-5">5</a>
+                </div>
+            </div>
+            <!-- <a href="#mainslide-1">1</a>
+            <a href="#mainslide-2">2</a>
+            <a href="#mainslide-3">3</a> -->
+        </div>
     </div>
+    
 </div>
 
+    
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this;
+        var selector = ".yes";
+        
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+          content.style.whiteSpace = "nowrap";
+          content.style.overflow = "hidden";
+          content.style.display ="inline-block";
+        } else {
+          content.style.maxHeight = "1000px";
+          content.style.whiteSpace = "normal";
+          content.style.overflow = "visible";
+          content.style.display ="block";
+        //   parent.style.maxHeight = parent.style.height + "1000px";
+        } 
+      });
+    }
+</script>
+
 </body>
+
+
+
 </html>
