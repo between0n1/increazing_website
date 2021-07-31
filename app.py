@@ -43,5 +43,6 @@ if __name__ == '__main__':
     if os.environ.get('FLASK_ENV') == "development":
         app.run(host='0.0.0.0', port=5000)  # for test
     else:
+        app.debug=True
         serve(app, host = '0.0.0.0', port = 5000)
 
