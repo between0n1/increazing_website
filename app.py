@@ -37,12 +37,12 @@ def home():
     return render_template("home.html", data = data)
 if __name__ == '__main__':
     scheduler = APScheduler()
-    scheduler.add_job(id="Scheduled task", func=scheduleTask, trigger= "interval", seconds= 600)
+    scheduler.add_job(id="Scheduled task", func=scheduleTask, trigger= "interval", seconds= 60)
     scheduler.start()
     print("running")
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     if os.environ.get('FLASK_ENV') == "development":
         app.run(host='0.0.0.0', port=5000)  # for test
     else:
-        app.debug=True
         serve(app, host = '0.0.0.0', port = 5000)
 
