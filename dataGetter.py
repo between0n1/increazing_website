@@ -64,7 +64,7 @@ def Reddit_Trends(): # return array of trending reddit posts
         reddit_author = reddit_post["author"]
         reddit_link = "http://www.reddit.com" + reddit_post["permalink"]
         if reddit_post["secure_media"] is not None:
-            reddit_video_url = reddit_post["secure_media"]["reddit_video"]['hls_url']
+            reddit_video_url = reddit_post["secure_media"]["reddit_video"]['fallback_url']
         else:
             if reddit_post['url'][-4] == ".":
                 reddit_img = reddit_post["url"]

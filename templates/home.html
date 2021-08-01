@@ -26,7 +26,7 @@
                             {% with post = platform.posts[index] %}
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="{{platform.name}}flush-heading{{index}}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{platform.name}}flush-collapse{{index}}" aria-expanded="false" aria-controls="#{{platform.name}}flush-collapse{{index}}">
+                            <button class="accordion-button collapsed" type="button" onclick = "pauseVideo()"  data-bs-toggle="collapse" data-bs-target="#{{platform.name}}flush-collapse{{index}}" aria-expanded="false" aria-controls="#{{platform.name}}flush-collapse{{index}}">
                                 <div class="accordion-my-header">
                                     <a style="position: relative;line-height: 10px;font-size: 12px; color:grey; " >Top {{index+1}} in {{platform.name}} with {{post.volume//1000}}K+ {{post.volumeUnit}} </a><br><a>{{post.title}}</a> 
                                 </div>
@@ -38,7 +38,7 @@
                                     {{post.topHTML|safe}}
                                 {% else %}
                                     {% if post.video != None %}
-                                    <video src="{{post.video}}" autoplay muted controls ></video>
+                                    <video src="{{post.video}}" id = "video" autoplay = "autoplay" muted = "muted" controls = "controls"></video>
                                     <a href = "{{post.link}}" target="_blank">Link</a>
                                     {% elif post.img != None %}
                                     <img src = "{{post.img}}" class = "img-fluid">
@@ -60,31 +60,18 @@
     
 </div>
 
-    
-<script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-    
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this;
-        var selector = ".yes";
-        
-        if (content.style.maxHeight){
-          content.style.maxHeight = null;
-          content.style.whiteSpace = "nowrap";
-          content.style.overflow = "hidden";
-          content.style.display ="inline-block";
-        } else {
-          content.style.maxHeight = "1000px";
-          content.style.whiteSpace = "normal";
-          content.style.overflow = "visible";
-          content.style.display ="block";
-        //   parent.style.maxHeight = parent.style.height + "1000px";
-        } 
-      });
-    }
+
+<script type="text/javascript">
+// pause every video 
+    function pauseVideo(){ 
+        var videos = document.getElementsByClassName("accordion-body")
+        for (i in videos){
+            if(videos[i].querySelector('video')){
+                var video = videos[i].querySelector('video');
+                video.pause();
+            }
+        }
+    };
 </script>
 
 </body>
