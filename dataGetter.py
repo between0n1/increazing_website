@@ -8,6 +8,10 @@ import requests
 import json
 
 
+#global var
+
+TARGETPOSTNUM = 10
+
 #Twitter
 #API Keys
 consumer_key = APIkeys.APIKEY
@@ -17,7 +21,6 @@ access_token_secret = APIkeys.AccessTokenSecret
 
 #Twitter Authorization and Authentificatgion
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
 #get trending twits
@@ -26,13 +29,23 @@ def Twitter_Trends(): # return array of trending twitter tweets
     twitter_trends = []
     for i in t:
         name = i['name']
+        if name[0] != "#":
+            name = "#" + name # to put hashtag
         url = i['url']
         twitter_volume = i['tweet_volume']
         twt = Twitter(title=name, link = url, volume=twitter_volume)
         if twitter_volume != None:
             twitter_trends.append(twt)
     twitter_trends.sort(reverse=True)
-    twitter_trends = twitter_trends[:10]
+    twitter_trends = twitter_trends[:TARGETPOSTNUM]
+    for i in twitter_trends:
+        res = api.search(result_type="popular", count=1, q= i.title, lang="en")
+        html = None
+        if res:
+            id = res[0].id
+            url = "https://twitter.com/Interior/status/" + str(id)
+            html = api.get_oembed(url=url)['html']
+        i.addTop(html)
     return twitter_trends
 #end of Twitter
 
@@ -40,9 +53,9 @@ def Twitter_Trends(): # return array of trending twitter tweets
 def Reddit_Trends(): # return array of trending reddit posts
     reddit_url = 'https://www.reddit.com/r/popular/top/.json?raw_json=1'
     reddit_requests = requests.get(url = reddit_url ,headers = {'User-agent': 'increaZing'})
-    reddit_data = reddit_requests.json()["data"]["children"][:15]
+    reddit_data = reddit_requests.json()["data"]["children"][:TARGETPOSTNUM]
     reddit_trends = []
-    for i in range(15):
+    for i in range(TARGETPOSTNUM):
         reddit_video_url = None
         reddit_img = None
         reddit_post = reddit_data[i]["data"]
@@ -55,10 +68,7 @@ def Reddit_Trends(): # return array of trending reddit posts
         else:
             if reddit_post['url'][-4] == ".":
                 reddit_img = reddit_post["url"]
-
         red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link, video=reddit_video_url)
         reddit_trends.append(red)
-
-
     return reddit_trends
 # end of reddit

@@ -26,20 +26,19 @@ class Source: # instagram, reddit, twitter
         for elem in self.posts:
             print(elem.title, elem.volume)
 
-class Post: # a post from sources
-    def __init__(self, title = "", text = "", captions = None, images = None, link = None):
-        self.title = title
-        self.text = text
-        self.images = images
-        self.captions = captions # array of string
-        self.link = link
-    def __repr__(self):
-        return self.title + ", " + self.text
 
-class Twitter(Post):
-    def __init__(self, title = "", text= "", link = None, volume = None):
-        super().__init__(title= title, text= text, link= link)
+class Twitter():
+    def __init__(self, title = "",  link = None, volume = None, topHTML = None):
+        self.topHTML = topHTML # a html script
+        self.title = title # hashtag
+        self.link = link
         self.volume = volume
+        self.volumeUnit = "tweets"
+    def addTop(self,html):
+        self.topHTML = html
+
+
+
     def __repr__(self):
         return f"title: {self.title} volume: {str(self.volume)} link: {self.link}"
     def __lt__(self, other):
@@ -47,13 +46,17 @@ class Twitter(Post):
     def __eq__(self, other):
         return self.volume == other.volume
 
-class Reddit(Post):
+
+class Reddit():
     def __init__(self, title = "", text= "", link = None, volume = None, img = None, author = None, video = None):
-        super().__init__(title= title, text= text, link= link)
+        self.title = title
+        self.text= text
+        self.link = link
         self.volume = volume
         self.img = img
         self.author = author
         self.video = video
+        self.volumeUnit = "upvotes"
     def __repr__(self):
         return f"title: {self.title} volume: {str(self.volume)} link: {self.link}"
     def __lt__(self, other):

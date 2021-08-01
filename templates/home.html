@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 <body>
@@ -19,57 +19,42 @@
     </div>
     <div class="mainslider">
         <div class="mainslides">
-            <div class = "Twitter" id ="mainslide-1">
-                <a href = "https://www.twitter.com" target="_blank"><img class = "Logo" alt = "Twitter Logo" src="../static/images/twitter.svg" ></a>
-                {% for post in (data.get("Twitter").posts) %}
-                    <div class = "Twit" onclick="window.open('{{post.link}}');">
-                        {% if post.title[0] != '#' %}
-                            <a>#{{post.title}}</a>
-                        {% else %}
-                            <a> {{post.title}}</a>
-                        {% endif %}
-                        <b>{{post.volume//1000}}K+ tweets</b><br>
-                    </div>
-                {% endfor %}
-            </div>
-        
-            <div class="Google" id ="mainslide-2">
-            <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
-            </div>
-        
-            <div class="Reddit" id ="mainslide-3">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    {% for index in range(10) %}
-                        {% with post = data.get("Reddit").posts[index] %}
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-heading{{index}}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{index}}" aria-expanded="false" aria-controls="#flush-collapse{{index}}">
-                            <div class="accordion-my-header">
-                                <a style="position: relative;line-height: 10px;font-size: 12px; color:grey; " >Top {{index+1}} with {{post.volume//1000}}K+ likes </a><br> <a>{{post.title}}</a>
+            {% for platform in data.sources.values() %}
+                <div class = "{{platform.name}}" id = "mainslide-{{platform.name}}">
+                    <div class="accordion accordion-flush" id="{{platform.name}}accordionFlushExample">
+                        {% for index in range(10) %}
+                            {% with post = platform.posts[index] %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="{{platform.name}}flush-heading{{index}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{platform.name}}flush-collapse{{index}}" aria-expanded="false" aria-controls="#{{platform.name}}flush-collapse{{index}}">
+                                <div class="accordion-my-header">
+                                    <a style="position: relative;line-height: 10px;font-size: 12px; color:grey; " >Top {{index+1}} in {{platform.name}} with {{post.volume//1000}}K+ {{post.volumeUnit}} </a><br><a>{{post.title}}</a> 
+                                </div>
+                            </button>
+                            </h2>
+                            <div id="{{platform.name}}flush-collapse{{index}}" class="accordion-collapse collapse" aria-labelledby="{{platform.name}}flush-heading{{index}}" data-bs-parent="#{{platform.name}}accordionFlushExample">
+                            <div class="accordion-body">
+                                {% if platform.name == "Twitter" %}
+                                    {{post.topHTML|safe}}
+                                {% else %}
+                                    {% if post.video != None %}
+                                    <video src="{{post.video}}" autoplay muted controls ></video>
+                                    <a href = "{{post.link}}" target="_blank">Link</a>
+                                    {% elif post.img != None %}
+                                    <img src = "{{post.img}}" class = "img-fluid">
+                                    <a href = "{{post.link}}" target="_blank">Link</a>
+                                    {% else %}
+                                    <a > No image or video currently available for this post. Click </a><a href = "{{post.link}}" target="_blank">here</a> <a>to see the post in reddit</a>
+                                    {% endif %}
+                                {% endif %}
                             </div>
-                        </button>
-                        </h2>
-                        <div id="flush-collapse{{index}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            {% if post.video != None %}
-                            <video src="{{post.video}}" autoplay muted controls ></video>
-                            <a href = "{{post.link}}" target="_blank">Link</a>
-                            {% elif post.img != None %}
-                            <img src = "{{post.img}}" class = "img-fluid">
-                            <a href = "{{post.link}}" target="_blank">Link</a>
-                            {% else %}
-                            <a > No image or video currently available for this post. Click </a><a href = "{{post.link}}" target="_blank">here</a> <a>to see the post in reddit</a>
-                            {% endif %}
+                            </div>
                         </div>
-                        </div>
+                        {% endwith %}
+                        {% endfor %}  
                     </div>
-                    {% endwith %}
-                    {% endfor %}  
                 </div>
-            </div>
-            <!-- <a href="#mainslide-1">1</a>
-            <a href="#mainslide-2">2</a>
-            <a href="#mainslide-3">3</a> -->
+            {% endfor %}
         </div>
     </div>
     
