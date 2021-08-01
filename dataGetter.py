@@ -53,7 +53,8 @@ def Reddit_Trends(): # return array of trending reddit posts
         if reddit_post["secure_media"] is not None:
             reddit_video_url = reddit_post["secure_media"]["reddit_video"]['hls_url']
         else:
-            reddit_img = reddit_post["url"]
+            if reddit_post['url'][-4] == ".":
+                reddit_img = reddit_post["url"]
 
         red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link, video=reddit_video_url)
         reddit_trends.append(red)
