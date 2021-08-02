@@ -1,7 +1,7 @@
 # increaZing
 http://www.increazing.com
 Website with top 10 trending posts from various social media platform
-
+![img_1.png](img_1.png)
 
 # Now available with:
 - top 10 trending hashtags from Twitter (using API)
