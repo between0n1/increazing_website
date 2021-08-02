@@ -1,12 +1,12 @@
 # increaZing
 http://www.increazing.com
 Website with top 10 trending posts from various social media platform
-![img.png](img.png)
+
 
 # Now available with:
 - top 10 trending hashtags from Twitter (using API)
-- top 10 trending searches from Google ( temporarily deleted )
-- top 15 trending post from reddit (including image or video)
+- top 10 trending searches from Google 
+- top 10 trending post from reddit (including image or video)
 # To-do:
 - website design
 - add more social media platforms that offer trends API
