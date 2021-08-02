@@ -6,7 +6,7 @@ from flask_apscheduler import APScheduler
 import APIkeys
 import requests
 import json
-
+import pytrends
 
 #global var
 

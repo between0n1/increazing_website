@@ -15,6 +15,7 @@
 <body>
     <a style="position: fixed; color: white; margin-top: 20px; margin-left: 20px; font-size: 30px;">Increazing.com</a>
 <div class='ripple-background'>
+    <img src = "../static/images/logo.png" style="position: fixed; height: 10%; margin-left: 2.5px; margin-top: 2.5px; max-height: 100px; min-height: 60px;"></img>
     <div class='circle xxlarge shade1'></div>
     <div class='circle xlarge shade2'></div>
     <div class='circle large shade3'></div>
@@ -24,6 +25,9 @@
 <div class = "hero">
     <div class="mainslider">
         <div class="mainslides">
+            <div class = "Google">
+                <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2578_RC02/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+            </div>            
             {% for platform in data.sources.values() %}
                 <div class = "{{platform.name}}" id = "mainslide-{{platform.name}}">
                     <div class="accordion accordion-flush" id="{{platform.name}}accordionFlushExample">
@@ -60,6 +64,7 @@
                     </div>
                 </div>
             {% endfor %}
+            
         </div>
     </div>
     
