@@ -47,15 +47,18 @@
                                     {{post.topHTML|safe}}
                                 {% else %}
                                     {% if post.video != None %}
-                                    <video src="{{post.video}}" id = "video" autoplay = "autoplay" muted = "muted" controls = "controls"></video>
-                                    <a href = "{{post.link}}" target="_blank">Link</a>
+                                    <video src="{{post.video}}" id = "video" autoplay = "autoplay"  controls = "controls"></video>
+                                    
                                     {% elif post.img != None %}
                                     <img src = "{{post.img}}" class = "img-fluid">
-                                    <a href = "{{post.link}}" target="_blank">Link</a>
+            
+                                    {% elif post.html != None %}
+                                        {{post.html|safe}}
                                     {% else %}
                                     <a > No image or video currently available for this post. Click </a><a href = "{{post.link}}" target="_blank">here</a> <a>to see the post in reddit</a>
                                     {% endif %}
                                 {% endif %}
+                                <a href = "{{post.link}}" target="_blank">Link</a>
                             </div>
                             </div>
                         </div>

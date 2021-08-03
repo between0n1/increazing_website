@@ -58,17 +58,25 @@ def Reddit_Trends(): # return array of trending reddit posts
     for i in range(TARGETPOSTNUM):
         reddit_video_url = None
         reddit_img = None
+        html = None
         reddit_post = reddit_data[i]["data"]
         reddit_volume = reddit_post["score"]
         reddit_title = reddit_post["title"]
         reddit_author = reddit_post["author"]
         reddit_link = "http://www.reddit.com" + reddit_post["permalink"]
         if reddit_post["secure_media"] is not None:
-            reddit_video_url = reddit_post["secure_media"]["reddit_video"]['fallback_url']
+            if reddit_post["secure_media"].get("reddit_video", 0):
+                reddit_video_url = reddit_post["secure_media"]["reddit_video"]['fallback_url']
+            else:
+                try:
+                    html = reddit_post["secure_media"]['oembed']['html']
+                except KeyError:
+                    html = None
         else:
             if reddit_post['url'][-4] == ".":
                 reddit_img = reddit_post["url"]
-        red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link, video=reddit_video_url)
+
+        red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link, video=reddit_video_url, html = html)
         reddit_trends.append(red)
     return reddit_trends
 # end of reddit

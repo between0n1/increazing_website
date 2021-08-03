@@ -13,7 +13,7 @@ Website with top 10 trending posts from various social media platform
 - Versioning ( different files for production and for development )
 - if user click a hashtag or something, scroll move center.
 - why some twitter popular search returns None?
-
+- add Youtube
 # Done:
 - connected to AWS ec2 (Jul 27 2021)
 - website automatically fetch data from social media platforms in the AWS ec2 virtual server (Jul 27 2021)

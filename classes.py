@@ -48,7 +48,7 @@ class Twitter():
 
 
 class Reddit():
-    def __init__(self, title = "", text= "", link = None, volume = None, img = None, author = None, video = None):
+    def __init__(self, title = "", text= "", link = None, volume = None, img = None, author = None, video = None, html = None):
         self.title = title
         self.text= text
         self.link = link
@@ -57,6 +57,7 @@ class Reddit():
         self.author = author
         self.video = video
         self.volumeUnit = "upvotes"
+        self.html = html
     def __repr__(self):
         return f"title: {self.title} volume: {str(self.volume)} link: {self.link}"
     def __lt__(self, other):
