@@ -13,7 +13,6 @@
 
 </head>
 <body>
-    <a style="position: fixed; color: white; margin-top: 20px; margin-left: 20px; font-size: 30px;">Increazing.com</a>
 <div class='ripple-background'>
     <img src = "../static/images/logo.png" style="position: fixed; height: 10%; margin-left: 2.5px; margin-top: 2.5px; max-height: 100px; min-height: 60px;"></img>
     <div class='circle xxlarge shade1'></div>
@@ -37,7 +36,11 @@
                             <h2 class="accordion-header" id="{{platform.name}}flush-heading{{index}}">
                             <button class="accordion-button collapsed" type="button" onclick = "pauseVideo()"  data-bs-toggle="collapse" data-bs-target="#{{platform.name}}flush-collapse{{index}}" aria-expanded="false" aria-controls="#{{platform.name}}flush-collapse{{index}}">
                                 <div class="accordion-my-header">
-                                    <a style="position: relative;line-height: 10px;font-size: 12px; color:grey; " >Top {{index+1}} in {{platform.name}} with {{post.volume//1000}}K+ {{post.volumeUnit}} </a><br><a>{{post.title}}</a> 
+                                    <a style="position: relative;line-height: 10px;font-size: 12px; color:grey; " >
+                                        {% if post.volume %}
+                                        Top {{index+1}} in {{platform.name}} with {{post.vol}}</a>
+                                        <br><a>{{post.title}}</a> 
+                                        {% endif %}
                                 </div>
                             </button>
                             </h2>
@@ -45,13 +48,15 @@
                             <div class="accordion-body">
                                 {% if platform.name == "Twitter" %}
                                     {{post.topHTML|safe}}
+                                {% elif platform.name == "Youtube" %}
+                                <div class = "video-container">
+                                    <iframe width="420" height="315" src= "{{post.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
                                 {% else %}
                                     {% if post.video != None %}
                                     <video src="{{post.video}}" id = "video" autoplay = "autoplay"  controls = "controls"></video>
-                                    
                                     {% elif post.img != None %}
                                     <img src = "{{post.img}}" class = "img-fluid">
-            
                                     {% elif post.html != None %}
                                         {{post.html|safe}}
                                     {% else %}
@@ -69,6 +74,7 @@
             {% endfor %}
             
         </div>
+        
     </div>
     
 </div>

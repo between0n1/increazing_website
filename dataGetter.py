@@ -7,6 +7,8 @@ import APIkeys
 import requests
 import json
 import pytrends
+import urllib
+import urllib.request
 
 #global var
 
@@ -80,3 +82,30 @@ def Reddit_Trends(): # return array of trending reddit posts
         reddit_trends.append(red)
     return reddit_trends
 # end of reddit
+
+
+# Youtube
+url = "https://www.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&regionCode=US&maxResults=10&key=" + APIkeys.GOOGLEAPIKEY
+
+def Youtube_Trends():
+    youtube_trends = []
+    videos = (requests.get(url=url).json()['items'])
+    for video in videos:
+        video_src = "https://www.youtube.com/embed/" + (video['id'])
+
+        # firstly, get top 10 trending youtube and we will fetch their title, viewcount using their id
+        params = {'id': video['id'], 'key' : APIkeys.GOOGLEAPIKEY, 'fields': 'items(id,snippet(channelId,title,categoryId),statistics)', 'part': 'snippet,statistics'}
+        url_ = 'https://www.googleapis.com/youtube/v3/videos'
+        query_string = urllib.parse.urlencode(params)
+        url_ = url_ + "?" + query_string
+
+        with urllib.request.urlopen(url_) as response:
+            response_text = response.read()
+            data = json.loads(response_text.decode())
+            title = data['items'][0]['snippet']['title']
+            viewCount = data['items'][0]['statistics']['viewCount']
+
+        You = Youtube(video=video_src, title = title, volume = viewCount)
+        youtube_trends.append(You)
+    youtube_trends.sort(reverse=True)
+    return youtube_trends

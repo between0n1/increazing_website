@@ -17,10 +17,13 @@ def scheduleTask():
     SocialMedias.clear()
     twitter_trend = dataGetter.Twitter_Trends()
     reddit_trend = dataGetter.Reddit_Trends()
+    youtube_trend = dataGetter.Youtube_Trends()
     Twitter = Source(name="Twitter", posts = twitter_trend)
     Reddit = Source(name="Reddit", posts = reddit_trend)
+    Youtube = Source(name="Youtube", posts = youtube_trend)
     SocialMedias.add(Twitter)
     SocialMedias.add(Reddit)
+    SocialMedias.add(Youtube)
     print("Finished")
 
 
@@ -40,7 +43,7 @@ if __name__ == '__main__':
     scheduler.add_job(id="Scheduled task", func=scheduleTask, trigger= "interval", seconds= 300)
     scheduler.start()
     print("running")
-    print(SocialMedias.sources)
+    SocialMedias.display()
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     if os.environ.get('FLASK_ENV') == "development":
         app.run(host='0.0.0.0', port=5000)  # for test

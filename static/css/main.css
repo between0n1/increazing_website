@@ -265,13 +265,31 @@ box-shadow: 4px 5px 7px 1px rgba(255,255,255,0.75);
 
 /* Style the button that is used to open and close the collapsible content */
 
+.video-container{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.video-container > iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+}
 .accordion-body{
   text-align: center;
   max-width: 100%;
   overflow : hidden;
   justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
+}
+.accordion-body > *{
+  max-width: 100%;
 }
 .accordion-toggle{
   background: black;

@@ -1,19 +1,22 @@
 # increaZing
-http://www.increazing.com
+http://www.increazing.com <br>
 Website with top 10 trending posts from various social media platform
-![img_1.png](img_1.png)
+
+![img.png](img.png)
 
 # Now available with:
 - top 10 trending hashtags from Twitter (using API)
 - top 10 trending searches from Google 
 - top 10 trending post from reddit (including image or video)
+- top 10 trending videos from Youtube
+
 # To-do:
 - website design
 - add more social media platforms that offer trends API
 - Versioning ( different files for production and for development )
 - if user click a hashtag or something, scroll move center.
 - why some twitter popular search returns None?
-- add Youtube
+- make website dealing with exceptions.
 # Done:
 - connected to AWS ec2 (Jul 27 2021)
 - website automatically fetch data from social media platforms in the AWS ec2 virtual server (Jul 27 2021)
