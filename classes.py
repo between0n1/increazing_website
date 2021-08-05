@@ -29,9 +29,10 @@ class Platforms:
         self.sources = {}
 
 class Source: # instagram, reddit, twitter
-    def __init__(self, name, posts): # posts = array of post object
+    def __init__(self, name, posts, postCount): # posts = array of post object
         self.name = name
         self.posts = posts
+        self.postCount = postCount
     def __repr__(self):
         return self.name
     def display(self):

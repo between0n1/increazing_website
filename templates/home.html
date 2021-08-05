@@ -30,7 +30,7 @@
             {% for platform in data.sources.values() %}
                 <div class = "{{platform.name}}" id = "mainslide-{{platform.name}}">
                     <div class="accordion accordion-flush" id="{{platform.name}}accordionFlushExample">
-                        {% for index in range(10) %}
+                        {% for index in range(platform.postCount) %}
                             {% with post = platform.posts[index] %}
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="{{platform.name}}flush-heading{{index}}">
