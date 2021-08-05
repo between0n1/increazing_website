@@ -41,8 +41,9 @@ def Twitter_Trends():  # return array of trending twitter tweets
             twitter_trends.append(twt)
     twitter_trends.sort(reverse=True)
     twitter_trends = twitter_trends[:TARGETPOSTNUM]
-    for i in twitter_trends:
-        res = api.search(result_type="popular", count=1, q=i.title, lang="en")
+    for i in twitter_trends: # add popular post related to the hash tag
+        res = api.search(result_type="popular", count=1, q=i.title[1:], lang="en")
+        # we use i.title[1:] to not include hash-tag
         html = None
         if res:
             id = res[0].id
