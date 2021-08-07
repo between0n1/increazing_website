@@ -72,7 +72,7 @@ def Reddit_Trends():  # return array of trending reddit posts
         reddit_link = "http://www.reddit.com" + reddit_post["permalink"]
         if reddit_post["secure_media"] is not None:
             if reddit_post["secure_media"].get("reddit_video", 0):
-                reddit_video_url = reddit_post["secure_media"]["reddit_video"]['fallback_url']
+                reddit_video_url = reddit_post["secure_media"]["reddit_video"]['hls_url']
             else:
                 try:
                     html = reddit_post["secure_media"]['oembed']['html']

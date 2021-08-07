@@ -80,6 +80,7 @@ class Reddit():
 class Youtube():
     def __init__(self, video = None, title = None, volume = None):
         self.video = video
+        self.link = video
         self.title = title
         self.volume = int(volume)
         self.volumeUnit = "views"
