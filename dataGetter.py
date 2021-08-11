@@ -111,9 +111,14 @@ def Youtube_Trends():
         with urllib.request.urlopen(url_) as response:
             response_text = response.read()
             data = json.loads(response_text.decode())
-            title = data['items'][0]['snippet']['title']
-            viewCount = data['items'][0]['statistics']['viewCount']
-
+            try:
+                title = data['items'][0]['snippet']['title']
+            except KeyError:
+                title = "Unknown Title"
+            try:
+                viewCount = data['items'][0]['statistics']['viewCount']
+            except KeyError:
+                viewCount = 0
         You = Youtube(video=video_src, title=title, volume=viewCount)
         youtube_trends.append(You)
     youtube_trends.sort(reverse=True)

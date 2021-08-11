@@ -28,6 +28,7 @@ class Platforms:
     def clear(self):
         self.sources = {}
 
+# we do not need this class
 class Source: # instagram, reddit, twitter
     def __init__(self, name, posts, postCount): # posts = array of post object
         self.name = name
