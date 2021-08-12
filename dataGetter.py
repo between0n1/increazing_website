@@ -59,32 +59,35 @@ def Twitter_Trends():  # return array of trending twitter tweets
 def Reddit_Trends():  # return array of trending reddit posts
     reddit_url = 'https://www.reddit.com/r/popular/top/.json?raw_json=1'
     reddit_requests = requests.get(url=reddit_url, headers={'User-agent': 'increaZing'})
-    reddit_data = reddit_requests.json()["data"]["children"][:TARGETPOSTNUM]
-    reddit_trends = []
-    for i in range(TARGETPOSTNUM):
-        reddit_video_url = None
-        reddit_img = None
-        html = None
-        reddit_post = reddit_data[i]["data"]
-        reddit_volume = reddit_post["score"]
-        reddit_title = reddit_post["title"]
-        reddit_author = reddit_post["author"]
-        reddit_link = "http://www.reddit.com" + reddit_post["permalink"]
-        if reddit_post["secure_media"] is not None:
-            if reddit_post["secure_media"].get("reddit_video", 0):
-                reddit_video_url = reddit_post["secure_media"]["reddit_video"]['hls_url']
+    try:
+        reddit_data = reddit_requests.json()["data"]["children"][:TARGETPOSTNUM]
+        reddit_trends = []
+        for i in range(TARGETPOSTNUM):
+            reddit_video_url = None
+            reddit_img = None
+            html = None
+            reddit_post = reddit_data[i]["data"]
+            reddit_volume = reddit_post["score"]
+            reddit_title = reddit_post["title"]
+            reddit_author = reddit_post["author"]
+            reddit_link = "http://www.reddit.com" + reddit_post["permalink"]
+            if reddit_post["secure_media"] is not None:
+                if reddit_post["secure_media"].get("reddit_video", 0):
+                    reddit_video_url = reddit_post["secure_media"]["reddit_video"]['hls_url']
+                else:
+                    try:
+                        html = reddit_post["secure_media"]['oembed']['html']
+                    except KeyError:
+                        html = None
             else:
-                try:
-                    html = reddit_post["secure_media"]['oembed']['html']
-                except KeyError:
-                    html = None
-        else:
-            if reddit_post['url'][-4] == ".":
-                reddit_img = reddit_post["url"]
+                if reddit_post['url'][-4] == ".":
+                    reddit_img = reddit_post["url"]
 
-        red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link,
-                     video=reddit_video_url, html=html)
-        reddit_trends.append(red)
+            red = Reddit(title=reddit_title, volume=reddit_volume, author=reddit_author, img=reddit_img, link=reddit_link,
+                         video=reddit_video_url, html=html)
+            reddit_trends.append(red)
+    except:
+        reddit_trends = []
     return reddit_trends
 
 
