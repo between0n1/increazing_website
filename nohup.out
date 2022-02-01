@@ -1,0 +1,62 @@
+Refetching data...
+Finished
+running
+Twitter Reddit Youtube 
+Traceback (most recent call last):
+  File "app.py", line 51, in <module>
+    serve(app, host = '0.0.0.0', port =80)
+  File "/usr/local/lib/python3.7/site-packages/waitress/__init__.py", line 13, in serve
+    server = _server(app, **kw)
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 85, in create_server
+    sockinfo=sockinfo,
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 244, in __init__
+    self.bind_server_socket()
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 361, in bind_server_socket
+    self.bind(sockaddr)
+  File "/usr/local/lib/python3.7/site-packages/waitress/wasyncore.py", line 396, in bind
+    return self.socket.bind(addr)
+PermissionError: [Errno 13] Permission denied
+Refetching data...
+Finished
+running
+Twitter Reddit Youtube 
+Traceback (most recent call last):
+  File "app.py", line 51, in <module>
+    serve(app, host = '0.0.0.0', port =80)
+  File "/usr/local/lib/python3.7/site-packages/waitress/__init__.py", line 13, in serve
+    server = _server(app, **kw)
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 85, in create_server
+    sockinfo=sockinfo,
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 244, in __init__
+    self.bind_server_socket()
+  File "/usr/local/lib/python3.7/site-packages/waitress/server.py", line 361, in bind_server_socket
+    self.bind(sockaddr)
+  File "/usr/local/lib/python3.7/site-packages/waitress/wasyncore.py", line 396, in bind
+    return self.socket.bind(addr)
+PermissionError: [Errno 13] Permission denied
+Refetching data...
+Finished
+running
+Twitter Reddit Youtube 
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished
+Refetching data...
+Finished

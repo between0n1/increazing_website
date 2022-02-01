@@ -28,7 +28,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 
 # get trending twits
 def Twitter_Trends():  # return array of trending twitter tweets
-    t = api.trends_place(2352824)[0]['trends']
+    t = api.get_place_trends(2352824)[0]['trends']
     twitter_trends = []
     for i in t:
         name = i['name']
@@ -42,7 +42,7 @@ def Twitter_Trends():  # return array of trending twitter tweets
     twitter_trends.sort(reverse=True)
     twitter_trends = twitter_trends[:TARGETPOSTNUM]
     for i in twitter_trends: # add popular post related to the hash tag
-        res = api.search(result_type="popular", count=1, q=i.title[1:], lang="en")
+        res = api.search_tweets(result_type="popular", count=1, q=i.title[1:], lang="en")
         # we use i.title[1:] to not include hash-tag
         html = None
         if res:
