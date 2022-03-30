@@ -21,35 +21,19 @@ consumer_secret = APIkeys.APISecretKey
 access_token = APIkeys.AccessToken
 access_token_secret = APIkeys.AccessTokenSecret
 
-# Twitter Authorization and Authentificatgion
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 # get trending twits
 def Twitter_Trends():  # return array of trending twitter tweets
-    t = api.get_place_trends(2352824)[0]['trends']
+    query_params = {"platform_name" : "Twitter"}
+    end_point = 'https://www.api.increazing.com/api/recent'
+    response_api = requests.get(end_point).json()
     twitter_trends = []
-    for i in t:
-        name = i['name']
-        if name[0] != "#":
-            name = "#" + name  # to put hashtag
-        url = i['url']
-        twitter_volume = i['tweet_volume']
-        twt = Twitter(title=name, link=url, volume=twitter_volume)
-        if twitter_volume != None:
+    for item in response_api['data']:
+        if item['platform_name'] == "Twitter":
+            twt = Twitter(title = item["title"], link = item["oembed"], volume= item["volume"])
+            twt.addTop(item["oembed"])
             twitter_trends.append(twt)
-    twitter_trends.sort(reverse=True)
-    twitter_trends = twitter_trends[:TARGETPOSTNUM]
-    for i in twitter_trends: # add popular post related to the hash tag
-        res = api.search_tweets(result_type="popular", count=1, q=i.title[1:], lang="en")
-        # we use i.title[1:] to not include hash-tag
-        html = None
-        if res:
-            id = res[0].id
-            url = "https://twitter.com/Interior/status/" + str(id)
-            html = api.get_oembed(url=url)['html']
-        i.addTop(html)
     return twitter_trends
 
 
