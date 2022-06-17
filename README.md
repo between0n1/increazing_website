@@ -1,8 +1,13 @@
 # increaZing
 http://www.increazing.com <br>
-Website with top 10 trending posts from various social media platform
+Currently I turned off the website server.
 
 ![img.png](img.png)
+
+
+https://user-images.githubusercontent.com/67476090/174202634-3a4627f0-8a32-46af-881c-65c8f0f7b950.mp4
+
+
 
 # Now available with:
 - top 10 trending hashtags from Twitter (using API)
